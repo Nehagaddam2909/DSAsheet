@@ -1,23 +1,19 @@
 #include<bits/stdc++.h>
 using namespace std;
-
 class Solution {
 public:
-    int findDuplicate(vector<int>& nums) {
-        ios_base::sync_with_stdio(false);
-        cin.tie(0);
+    vector<int> findDuplicates(vector<int>& nums) {
         unordered_map<int,int>mp;
+        vector<int>v;
         for(int i=0;i<nums.size();i++)
         {
-            if(mp[nums[i]]!=0)
-                return nums[i];
-            
-            mp[nums[i]]=i+1;
+            int n=abs(nums[i]);
+            if(nums[n-1]>0) nums[n-1]=-nums[n-1];
+            else v.push_back(n);
         }
-        return 0;
+        return v;
     }
 };
-
 int main()
 {
     int n;
@@ -30,6 +26,9 @@ int main()
         nums.push_back(k);
     }
     Solution s;
-    cout<<s.findDuplicate(nums)<<endl;
+    vector<int>v;
+    v=s.findDuplicates(nums);
+    for(auto it:v)
+      cout<<it<<" ";
     return 0;
 }
